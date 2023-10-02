@@ -1,0 +1,17 @@
+.titles{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+a{
+    color: #7ad5e7!important;
+    text-underline-offset: 0.4rem; 
+    box-shadow: #098eb2;
+}
+
+a:hover{
+    text-decoration-color: white;
+    text-decoration: underline 0.1rem;
+  
+}

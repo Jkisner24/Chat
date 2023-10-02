@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-
-
+import style from './App.module.css';
 
 const socket = io('/')
 
@@ -42,17 +41,21 @@ function App() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}> 
+    <div className={style.chats} >
+      <form onSubmit={handleSubmit} > 
         <input onChange={handleInput} type='text' placeholder='Write your message' />
-        <Button type="submit" variant="light">
+        <Button type="submit" variant="info mt-1">
           send
         </Button>
       </form>
-      <ListGroup>
+      <ListGroup className='mb-2'>
         {
           messages.map((message, i) =>
-            <ListGroup.Item key={i}>{message.from}:{message.body}</ListGroup.Item>
+            <ListGroup.Item 
+              key={i} 
+              className={`mb-1 text-dark ${message.from === 'Me' ? 'text-start &&  text-secondary' : 'text-end && text-white-50 bg-dark'}`}
+            >
+            {message.from}:{message.body}</ListGroup.Item>
           )
         }
       </ListGroup>
