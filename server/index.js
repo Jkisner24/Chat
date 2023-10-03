@@ -3,9 +3,12 @@ import http from 'http'
 import { Server } from 'socket.io'
 import config from './config/config.js'
 import mongoose from 'mongoose'
+import router from './routes/index.js'
+import cors from 'cors'; 
 
 /* Instancia de Express */
 const app = express()
+app.use(cors())
 
 /* Servidor HTTP con Express */
 const server = http.createServer(app)
@@ -31,18 +34,19 @@ connectToDataBase()
 
 /* Conexion de socket */
 io.on('connection', socket => {
-    console.log(socket.id)
-    
-    socket.on('message', (body)=> {
-        console.log(body)
-        socket.broadcast.emit('message', {
-            body,
-            from: socket.id.slice(6)
-        })
-    })
-})
+    console.log(socket.id);
+  
+    socket.on('message', (message) => {
+      console.log(message);
+      socket.broadcast.emit('message', message);
+    });
+});
+  
+app.use(express.json()); 
 
 /* Inicio servidor http */
+
+app.use(router)
 
 const PORT = config.PORT
 server.listen(PORT)

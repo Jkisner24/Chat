@@ -4,10 +4,12 @@ import io from 'socket.io-client'
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import style from './App.module.css';
+import userLogin from '../../Hooks/loginHook.jsx';
 
 const socket = io('/')
 
 function App() {
+  const { username } = userLogin()
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -16,10 +18,10 @@ function App() {
     event.preventDefault()
     const newMessage = {
       body: message,
-      from: 'Me' 
+      from: username, 
     }
     setMessages([...messages, newMessage])
-    socket.emit('message', message)
+    socket.emit('message', newMessage)
   }
 
   useEffect(()=>{
@@ -40,7 +42,7 @@ function App() {
     })
   }
 
-  return (
+  return(
     <div className={style.chats} >
       <form onSubmit={handleSubmit} > 
         <input onChange={handleInput} type='text' placeholder='Write your message' />
