@@ -4,12 +4,12 @@ import io from 'socket.io-client'
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import style from './App.module.css';
-import userLogin from '../../Hooks/loginHook.jsx';
+import { useUser } from '../../Hooks/loginHook.jsx';
 
 const socket = io('/')
 
 function App() {
-  const { username } = userLogin()
+  const { username } = useUser();
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -22,6 +22,7 @@ function App() {
     }
     setMessages([...messages, newMessage])
     socket.emit('message', newMessage)
+    setMessage('');
   }
 
   useEffect(()=>{
@@ -45,7 +46,7 @@ function App() {
   return(
     <div className={style.chats} >
       <form onSubmit={handleSubmit} > 
-        <input onChange={handleInput} type='text' placeholder='Write your message' />
+        <input value={message} onChange={handleInput} type='text' placeholder='Write your message' />
         <Button type="submit" variant="info mt-1">
           send
         </Button>
@@ -55,7 +56,7 @@ function App() {
           messages.map((message, i) =>
             <ListGroup.Item 
               key={i} 
-              className={`mb-1 text-dark ${message.from === 'Me' ? 'text-start &&  text-secondary' : 'text-end && text-white-50 bg-dark'}`}
+              className={`mb-1 text-dark ${message.from !== username ? 'text-start &&  text-secondary' : 'text-end && text-white-50 bg-dark'}`}
             >
             {message.from}:{message.body}</ListGroup.Item>
           )

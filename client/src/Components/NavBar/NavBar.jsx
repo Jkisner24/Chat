@@ -13,7 +13,7 @@ function BasicExample() {
             <Nav.Link href="#home">Welcome to live Chat!</Nav.Link>
           </Nav>
           <Nav >
-            <Nav.Link href="#home">About me</Nav.Link>
+            <Nav.Link href="https://porftolio-eight.vercel.app/" target="_blank">About me</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
