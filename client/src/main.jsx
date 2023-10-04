@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { UserProvider } from './Hooks/loginHook.jsx';
-import Login from './Components/Login/login.jsx'
+import Login from './Components/Login/Login.jsx'
 import App from './Components/App/App.jsx'
 import NavBar from './Components/NavBar/NavBar.jsx'
 import Footer from './Components/Footer/Footer.jsx'
