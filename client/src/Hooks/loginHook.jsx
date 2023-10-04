@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
             // Actualizamos username con el valor por defecto
             setUsername('Guest');
           } else {
-            const response = await fetch('http://127.0.0.1:3001/api/register', {
+            const response = await fetch('http://localhost:80/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
