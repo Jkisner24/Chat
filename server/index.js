@@ -48,7 +48,7 @@ app.use(express.json());
 
 app.use(router)
 
-const PORT = config.PORT
+const PORT = process.env.PORT || config.PORT
 server.listen(PORT)
 console.log('Server on port', PORT)
 
