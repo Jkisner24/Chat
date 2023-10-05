@@ -27,10 +27,9 @@ export const UserProvider = ({ children }) => {
         setIsLoading(true);
         try {
           if (action === 'cancel') {
-            // Actualizamos username con el valor por defecto
             setUsername('Guest');
           } else {
-            const response = await fetch('https://chat-umgd.onrender.com/api/register', {
+            const response = await fetch('http://localhost:3001/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +38,6 @@ export const UserProvider = ({ children }) => {
             });
 
             if (response.status === 201) {
-              // Actualizamos username con el valor ingresado por el usuario
               setUsername(login);
             } else if (response.status === 400) {
               Swal.fire('Username already exists. Please choose a different one.');
@@ -63,8 +61,6 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // Retrasamos el renderizado del componente Login.jsx
-    // hasta que se haya mostrado la alerta
     return () => {
       setIsAlertShown(true);
     };
