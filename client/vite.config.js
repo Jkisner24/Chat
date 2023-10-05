@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: 'https://chat-umgd.onrender.com',
+        target: 'http://localhost:80',
         ws: 'true'
       }
     }
