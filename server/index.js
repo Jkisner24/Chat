@@ -48,7 +48,7 @@ app.use(express.json());
 
 app.use(router)
 
-const PORT = config.PORT
+const PORT = config.PORT || 3000
 server.listen(PORT)
 console.log('Server on port', PORT)
 
