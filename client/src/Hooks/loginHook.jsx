@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
             // Actualizamos username con el valor por defecto
             setUsername('Guest');
           } else {
-            const response = await fetch('https://chat-umgd.onrender.com/api/register', {
+            const response = await fetch('http://localhost:80/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
