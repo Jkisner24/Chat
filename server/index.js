@@ -56,7 +56,13 @@ app.use(express.json());
 
 /* Inicio servidor http */
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+});
+
 app.use(router)
+
+
 
 const PORT = config.PORT 
 server.listen(PORT)
