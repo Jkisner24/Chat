@@ -48,7 +48,7 @@ app.use(express.json());
 
 app.use(router)
 
-const PORT = 3001 /* config.PORT || */ 
+const PORT = 3001 || config.PORT 
 server.listen(PORT)
 console.log('Server on port', PORT)
 
