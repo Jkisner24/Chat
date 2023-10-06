@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import router from './routes/index.js'
 import cors from 'cors'; 
 import { fileURLToPath } from 'url';
+import path from 'path'
 import { dirname } from 'path';
 
 // Obtiene la ruta del archivo actual
