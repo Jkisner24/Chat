@@ -10,6 +10,9 @@ import cors from 'cors';
 const app = express()
 app.use(cors())
 
+// Configuración para servir archivos estáticos de Vite (reemplaza 'client/dist' con la ruta correcta a tu carpeta de distribución)
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
 /* Servidor HTTP con Express */
 const server = http.createServer(app)
 
