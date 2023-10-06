@@ -40,8 +40,10 @@ export const UserProvider = ({ children }) => {
             if (response.status === 201) {
               setUsername(login);
             } else if (response.status === 400) {
+              console.error('Error:', error);
               Swal.fire('Username already exists. Please choose a different one.');
             } else {
+              console.error('Error:', error);
               Swal.fire('An error occurred. Please try again.');
             }
           }
