@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
           if (action === 'cancel') {
             setUsername('Guest');
           } else {
-            const response = await fetch('/api/register', {
+            const response = await fetch('https://chat-umgd.onrender.com/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
