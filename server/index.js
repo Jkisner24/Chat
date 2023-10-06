@@ -18,7 +18,7 @@ const app = express()
 app.use(cors())
 
 // Configuración para servir archivos estáticos de Vite 
-app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, 'client/dist/assets')));
 
 /* Servidor HTTP con Express */
 const server = http.createServer(app)
