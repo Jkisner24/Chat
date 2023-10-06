@@ -5,7 +5,12 @@ import config from './config/config.js'
 import mongoose from 'mongoose'
 import router from './routes/index.js'
 import cors from 'cors'; 
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Obtiene la ruta del archivo actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /* Instancia de Express */
 const app = express()
