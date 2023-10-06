@@ -5,12 +5,13 @@ import config from './config/config.js'
 import mongoose from 'mongoose'
 import router from './routes/index.js'
 import cors from 'cors'; 
+import path from 'path';
 
 /* Instancia de Express */
 const app = express()
 app.use(cors())
 
-// Configuración para servir archivos estáticos de Vite (reemplaza 'client/dist' con la ruta correcta a tu carpeta de distribución)
+// Configuración para servir archivos estáticos de Vite 
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
 /* Servidor HTTP con Express */
