@@ -41,6 +41,12 @@ export const UserProvider = ({ children }) => {
               setUsername(login);
                const socket = io('https://chat-umgd.onrender.com')
                 socket.emit('User connected', { nameUser: username });
+                Swal.fire({
+                  title: 'User Connected',
+                  text: 'Welcome to de live chat!',
+                  icon: 'success',
+                })
+                
             } else if (response.status === 400) {
               Swal.fire('Username already exists. Please choose a different one.');
             } else {
