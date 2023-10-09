@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 import Swal from 'sweetalert2';
-import socket from '../Components/App/App.jsx';
+import { socket } from '../Components/App/App.jsx';
 
 const UserContext = createContext();
 
@@ -10,10 +10,10 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [username, setUsername] = useState('Guest'); 
-  const [isAlertShown, setIsAlertShown] = useState(false);
+  const [username, setUsername] = useState('Guest');
+  const [userConnected, setUserConnected] = useState(false);
 
-  const showAlert = () => {
+  const showLoginAlert = () => {
     Swal.fire({
       title: 'Welcome, choose how to enter!',
       input: 'text',
@@ -23,6 +23,7 @@ export const UserProvider = ({ children }) => {
       showCancelButton: true,
       confirmButtonText: 'Enter name',
       cancelButtonText: 'Sign in as a guest',
+      allowOutsideClick: false,
       showLoaderOnConfirm: true,
       preConfirm: async (login, action) => {
         setIsLoading(true);
@@ -39,18 +40,18 @@ export const UserProvider = ({ children }) => {
             });
 
             if (response.status === 201) {
-              setUsername(login)
-                socket.emit('User connected', { nameUser: username })
-                Swal.fire({
-                  title: 'User Connected',
-                  text: 'Welcome to de live chat!',
-                  icon: 'success',
-                })
-                
+              setUsername(login);
+              socket.emit('user-connected', { nameUser: login });
+              setUserConnected(true);
+              Swal.fire({
+                title: 'User Connected',
+                text: 'Welcome to live chat!',
+                icon: 'success',
+              });
             } else if (response.status === 400) {
               Swal.fire('Username already exists. Please choose a different one.');
             } else {
-              Swal.fire('An error occurred. Please try again.')
+              Swal.fire('An error occurred. Please try again.');
             }
           }
         } catch (error) {
@@ -64,15 +65,27 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.removeItem('alertShown');
-    showAlert();
-  }, []);
+    socket.on('userConnectedMessage', (message) => {
+      if (userConnected) {
+        Swal.fire({
+          position: 'bottom-right',
+          icon: 'info',
+          title: 'New User Connected',
+          text: message,
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
+    });
+
+    return () => {
+      socket.off('userConnectedMessage');
+    };
+  }, [userConnected]);
 
   useEffect(() => {
-    return () => {
-      setIsAlertShown(true);
-    };
-  }, [isAlertShown]);
+    showLoginAlert();
+  }, []);
 
   return (
     <UserContext.Provider value={{ isLoading, username }}>

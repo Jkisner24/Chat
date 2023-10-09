@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import style from './App.module.css';
 import { useUser } from '../../Hooks/loginHook.jsx';
 
-const socket = io('/')
+export const socket = io('/')
 
 function App() {
   const { username } = useUser();

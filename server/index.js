@@ -45,15 +45,15 @@ connectToDataBase()
 /* Conexion de socket */
 io.on('connection', socket => {
   socket.on('user-connected', (data) => {
-    const { nameUser } = data
-    console.log(`User Connected: ${nameUser}`)
+    const message = `${data.nameUser} connected.`;
+    socket.broadcast.emit('userConnectedMessage', message);
   })
-
+  
   socket.on('message', (message) => {
     console.log(message);
     socket.broadcast.emit('message', message);
     });
-});
+})
 
   
 app.use(express.json()); 
