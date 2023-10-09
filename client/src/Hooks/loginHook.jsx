@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 import Swal from 'sweetalert2';
-import socket from '../Components/App/App'
+import { socket } from '../Components/App/App.jsx'
 
 const UserContext = createContext();
 
@@ -39,8 +39,8 @@ export const UserProvider = ({ children }) => {
             });
 
             if (response.status === 201) {
-              setUsername(login);
-                socket.emit('User connected', { nameUser: username });
+              setUsername(login)
+                socket.emit('User connected', { nameUser: username })
                 Swal.fire({
                   title: 'User Connected',
                   text: 'Welcome to de live chat!',
