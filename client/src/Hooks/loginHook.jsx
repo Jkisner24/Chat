@@ -39,10 +39,12 @@ export const UserProvider = ({ children }) => {
 
             if (response.status === 201) {
               setUsername(login);
+               const socket = io('https://chat-umgd.onrender.com')
+                socket.emit('User connected', { nameUser: username });
             } else if (response.status === 400) {
               Swal.fire('Username already exists. Please choose a different one.');
             } else {
-              Swal.fire('An error occurred. Please try again.');
+              Swal.fire('An error occurred. Please try again.')
             }
           }
         } catch (error) {

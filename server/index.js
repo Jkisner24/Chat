@@ -44,18 +44,21 @@ connectToDataBase()
 
 /* Conexion de socket */
 io.on('connection', socket => {
-    console.log(socket.id);
-  
-    socket.on('message', (message) => {
-      console.log(message);
-      socket.broadcast.emit('message', message);
+  socket.on('user-connected', (data) => {
+    const { nameUser } = data
+    console.log(`User Connected: ${nameUser}`)
+  })
+
+  socket.on('message', (message) => {
+    console.log(message);
+    socket.broadcast.emit('message', message);
     });
 });
+
   
 app.use(express.json()); 
 
 /* Inicio servidor http */
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
