@@ -39,7 +39,6 @@ export const UserProvider = ({ children }) => {
 
             if (response.status === 201) {
               setUsername(login);
-               const socket = io('https://chat-umgd.onrender.com')
                 socket.emit('User connected', { nameUser: username });
                 Swal.fire({
                   title: 'User Connected',
